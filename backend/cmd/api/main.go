@@ -4,12 +4,16 @@ import (
 	"log"
 
 	"github.com/vincent-lin-uf/water-polo-web/backend/configs"
+	"github.com/vincent-lin-uf/water-polo-web/backend/pkg/db"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	cfg := configs.Load()
+
+	pool := db.Connect(cfg.DatabaseURL)
+	defer pool.Close()
 
 	router := gin.Default()
 
